@@ -33,11 +33,11 @@ const useStyles = makeStyles((theme) => ({
 const RenderForecast = ({ data }) => {
   return data.list ? [...Array(5).keys()].reduce((acc, el, id) => {
     return acc.concat([
-      <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>{moment().format('dddd')}, {moment().format('LL')}</Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}><img src={`http://openweathermap.org/img/w/${data.list[id].weather[0].icon}.png`} /></Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].weather[0].main}</Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].main.temp_max} &deg;C</Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].main.temp_min} &deg;C</Grid>
+      <Grid key={`render-forecast-grid-${id}1`} item xl={4} lg={4} md={4} sm={4} xs={4}>{moment().format('dddd')}, {moment().format('LL')}</Grid>,
+      <Grid key={`render-forecast-grid-${id}2`} item xl={2} lg={2} md={2} sm={2} xs={2}><img src={`http://openweathermap.org/img/w/${data.list[id].weather[0].icon}.png`} /></Grid>,
+      <Grid key={`render-forecast-grid-${id}3`} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].weather[0].main}</Grid>,
+      <Grid key={`render-forecast-grid-${id}4`} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].main.temp_max} &deg;C</Grid>,
+      <Grid key={`render-forecast-grid-${id}5`} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].main.temp_min} &deg;C</Grid>
     ])
   }, []) : ''
 }
@@ -45,14 +45,14 @@ const RenderForecast = ({ data }) => {
 const RenderWeather = ({ data }) => {
   return data.weather ?
      [
-      <Grid item xl={4} lg={4} md={4} sm={4} xs={4}>{moment().format('dddd')}, {moment().format('LL')}</Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}><img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} /></Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>{data.weather[0].main}</Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>{data.main.temp_max} &deg;C</Grid>,
-      <Grid item xl={2} lg={2} md={2} sm={2} xs={2}>{data.main.temp_min} &deg;C</Grid>,
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} ></Grid>,
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} ></Grid>,
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} ></Grid>
+      <Grid key={'render-weather-grid-1'} item xl={4} lg={4} md={4} sm={4} xs={4}>{moment().format('dddd')}, {moment().format('LL')}</Grid>,
+      <Grid key={'render-weather-grid-2'} item xl={2} lg={2} md={2} sm={2} xs={2}><img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} /></Grid>,
+      <Grid key={'render-weather-grid-3'} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.weather[0].main}</Grid>,
+      <Grid key={'render-weather-grid-4'} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.main.temp_max} &deg;C</Grid>,
+      <Grid key={'render-weather-grid-5'} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.main.temp_min} &deg;C</Grid>,
+      <Grid key={'render-weather-grid-6'} item xl={12} lg={12} md={12} sm={12} xs={12} ></Grid>,
+      <Grid key={'render-weather-grid-7'} item xl={12} lg={12} md={12} sm={12} xs={12} ></Grid>,
+      <Grid key={'render-weather-grid-8'} item xl={12} lg={12} md={12} sm={12} xs={12} ></Grid>
      ] : ''
   
 }
