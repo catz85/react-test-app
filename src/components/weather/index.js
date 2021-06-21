@@ -31,9 +31,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RenderForecast = ({ data }) => {
-  return data.list ? [...Array(5).keys()].reduce((acc, el, id) => {
+  return data.list ? [...Array(40).keys()].reduce((acc, el, id) => {
     return acc.concat([
-      <Grid key={`render-forecast-grid-${id}1`} item xl={4} lg={4} md={4} sm={4} xs={4}>{moment().format('dddd')}, {moment().format('LL')}</Grid>,
+      <Grid key={`render-forecast-grid-${id}1`} item xl={4} lg={4} md={4} sm={4} xs={4}>{ moment(+data.list[id].dt * 1000).format('dddd, LL, HH:MM') }</Grid>,
       <Grid key={`render-forecast-grid-${id}2`} item xl={2} lg={2} md={2} sm={2} xs={2}><img src={`http://openweathermap.org/img/w/${data.list[id].weather[0].icon}.png`} /></Grid>,
       <Grid key={`render-forecast-grid-${id}3`} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].weather[0].main}</Grid>,
       <Grid key={`render-forecast-grid-${id}4`} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.list[id].main.temp_max} &deg;C</Grid>,
@@ -45,7 +45,7 @@ const RenderForecast = ({ data }) => {
 const RenderWeather = ({ data }) => {
   return data.weather ?
      [
-      <Grid key={'render-weather-grid-1'} item xl={4} lg={4} md={4} sm={4} xs={4}>{moment().format('dddd')}, {moment().format('LL')}</Grid>,
+      <Grid key={'render-weather-grid-1'} item xl={4} lg={4} md={4} sm={4} xs={4}>{ moment(+data.dt*1000).format('dddd, LL, HH:MM')}</Grid>,
       <Grid key={'render-weather-grid-2'} item xl={2} lg={2} md={2} sm={2} xs={2}><img src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`} /></Grid>,
       <Grid key={'render-weather-grid-3'} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.weather[0].main}</Grid>,
       <Grid key={'render-weather-grid-4'} item xl={2} lg={2} md={2} sm={2} xs={2}>{data.main.temp_max} &deg;C</Grid>,
