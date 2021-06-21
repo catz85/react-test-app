@@ -58,9 +58,26 @@ const EditForm = forwardRef(({ onSubmit, initData }, ref) => {
             name="name"
             control={control}
             rules={{ required: true, value: initData.name }}
-            as={<TextField />}
+            as={<TextField helperText="Simple Name" error={formState.errors.name}  type="text" label="Name" />}
         ></Controller>
-       
+        <Controller
+            name="lon"
+            control={control}
+            rules={{ required: true, min: -180, max: 180 }}
+            as={<TextField helperText="-180 < x < 180" error={formState.errors.lon}  type="number" label="Longitude" />}
+        ></Controller>
+        <Controller
+            name="lat"
+            control={control}
+            rules={{ required: true, min: -90, max: 90 }}
+            as={<TextField helperText="-90 < x < 90" error={formState.errors.lat}  type="number" label="Latitude" />}
+        ></Controller>
+        <Controller
+            name="att"
+            control={control}
+            rules={{ required: true }}
+            as={<TextField  error={formState.errors.att}  type="number" label="Attitude" />}
+        ></Controller>
         <Button variant="contained" type="submit" style={{ maxHeight: '32px' }}>Save</Button>
     </form>
 
