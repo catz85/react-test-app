@@ -10,7 +10,7 @@ export default function Maps({lon, lat}) {
     return !isNaN(lon) && !isNaN(lat) ? (
         <div style={{height:"100%", width: "100%", position: "relative"}}>
         <Map
-            style="mapbox://styles/mapbox/streets-v9"
+            style={"mapbox://styles/mapbox/streets-v9"}
             center={[lon, lat]}
             containerStyle={{
                 height: '100%',

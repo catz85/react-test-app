@@ -7,7 +7,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -31,53 +31,31 @@ let defaultValuesMap = {
 
 const EditForm = forwardRef(({ onSubmit, initData }, ref) => {
     const classes = useStyles();
-    const defaultValues = { ...initData };
-    const { register, handleSubmit, reset, control, watch, setValue, getValues, validate, formState } = useForm({ shouldUnregister: false, defaultValues });
+    const defaultValues = {...initData};
+    const { register, handleSubmit, formState } = useForm({ shouldUnregister: false, defaultValues });
     const [dataForForm, setDataForForm] = useState({})
     const [formInit, setFormInit] = useState(false);
     useEffect(() => {
         if (formState.isDirty) return;
         Object.keys(defaultValuesMap).map((key) => {
-            setValue(key, initData[key], { shouldDirty: true })
+            
+            return register(key, { value:  initData[key] })
         })
     }, [initData.lat, initData.lon, initData.name, initData.att])
 
-    useEffect(() => {
+    useEffect(()=> {
         console.log(formState)
         if (formInit) return;
         setFormInit(true)
-        setTimeout(() => {
-            setDataForForm({ ...initData })
-        }, 500)
-
-    }, [formState])
-
+        setDataForForm({...initData})
+        
+    },[formState])
 
     return <form ref={ref} className={classes.root} autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-            name="name"
-            control={control}
-            rules={{ required: true, value: initData.name }}
-            as={<TextField helperText="Simple Name" error={formState.errors.name}  type="text" label="Name" />}
-        ></Controller>
-        <Controller
-            name="lon"
-            control={control}
-            rules={{ required: true, min: -180, max: 180 }}
-            as={<TextField helperText="-180 < x < 180" error={formState.errors.lon}  type="number" label="Longitude" />}
-        ></Controller>
-        <Controller
-            name="lat"
-            control={control}
-            rules={{ required: true, min: -90, max: 90 }}
-            as={<TextField helperText="-90 < x < 90" error={formState.errors.lat}  type="number" label="Latitude" />}
-        ></Controller>
-        <Controller
-            name="att"
-            control={control}
-            rules={{ required: true }}
-            as={<TextField  error={formState.errors.att}  type="number" label="Attitude" />}
-        ></Controller>
+        <TextField helperText="Simple Name" error={formState.errors.name} required type="text" label="Name" {...register("name", { required: true, value: initData.name })} />
+        <TextField helperText="-180 < x < 180" error={formState.errors.lon} required type="number" label="Longitude"  {...register("lon", { required: true, value: initData.lon, min: -180, max: 180 })} />
+        <TextField helperText="-90 < x < 90" error={formState.errors.lat} required type="number" label="Latitude" {...register("lat", { required: true, value: initData.lat,  min: -90, max: 90 })} />
+        <TextField helperText="required" error={formState.errors.att} required type="number" label="Attitude"  {...register("att", { required: true , value: initData.att})} />
         <Button variant="contained" type="submit" style={{ maxHeight: '32px' }}>Save</Button>
     </form>
 
@@ -124,7 +102,6 @@ export function StationsEdit(props) {
 
 export function Stations(props) {
     const [stationsParsed, setStationsParsed] = useState(JSON.parse(localStorage.getItem('weatherstations') || '[]'))
-    const history = useHistory();
     const deleteItem = (event, params) => {
         console.log(params)
         const storageData = JSON.parse(localStorage.getItem('weatherstations') || '[]')
@@ -143,7 +120,6 @@ export function Stations(props) {
                 return (
                     <ButtonGroup disableElevation variant="outlined" color="primary">
                         <Button onClick={e => deleteItem(e, params)}>Delete</Button>
-                        <Button onClick={e => history.push(`/stations/${params.id}/edit`)}>Edit</Button>
                     </ButtonGroup>
                 )
 

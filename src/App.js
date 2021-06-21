@@ -8,7 +8,7 @@ import {
   Redirect
 } from "react-router-dom";
 import Weather from './components/weather';
-import { Stations, StationsEdit, StationsAdd } from './components/stations'
+import { Stations,  StationsAdd } from './components/stations'
 import { createMuiTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
@@ -100,9 +100,9 @@ export default function App() {
               <Route exact path="/stations/add">
                 <StationsAdd />
               </Route>
-              <Route exact path="/stations/:id?/:edit?">
+              {/* <Route exact path="/stations/:id?/:edit?">
                 <StationsEdit />
-              </Route>
+              </Route> */}
               
               
               <Redirect from='*' to='/weather' />
