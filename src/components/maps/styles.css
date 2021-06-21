@@ -1,0 +1,8 @@
+.mapboxgl-canvas.mapboxgl-canvas {
+    position: static;
+    /* left: 0; */
+    /* top: 0; */
+}
+.mapboxgl-map.mapboxgl-map {
+    position: relative !important;
+}

@@ -1,0 +1,5 @@
+.react-geocoder-results {
+    position: absolute !important;
+    background-color: #c3c3c3;
+    z-index: 9999;
+}
