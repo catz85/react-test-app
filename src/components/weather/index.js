@@ -93,6 +93,7 @@ const WeatherCard = () => {
           });
         });
       } else {
+        console.log('WHATT???')
         setLatLon({ lat: urlParams.lat, lon: urlParams.lon, forecast: !!urlParams.forecast });
         setRefreshing(true);
       }
@@ -103,7 +104,8 @@ const WeatherCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!isNaN(latLon.lat) && !isNaN(latLon.lon)) {
+      if (!isNaN(latLon.lat) && !isNaN(latLon.lon) && refreshing) {
+        console.log('YESSS')
         if (new Date(+localStorage.getItem(`${latLon.forecast ? 'forecast' : 'weather'}Datalastupdate${latLon.lat}${latLon.lon}`) + cacheTime * 60000) > new Date()) {
           setData(JSON.parse(localStorage.getItem(`${latLon.forecast ? 'forecast' : 'weather'}Data${latLon.lat}${latLon.lon}`)));
         } else {
@@ -120,7 +122,7 @@ const WeatherCard = () => {
     }
     fetchData();
     console.log('WE HERE! 0')
-  }, [latLon.lat, latLon.lon, latLon.forecast]);
+  }, [latLon.lat, latLon.lon, latLon.forecast, refreshing]);
 
   return (
     <>
