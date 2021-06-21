@@ -1,3 +1,19 @@
+U need setup .env
+
+REACT_APP_OPENWEATHER_API_URL=
+REACT_APP_OPENWEATHER_API_KEY=
+REACT_APP_ICON_URL=
+REACT_APP_GOOGLE_MAPS_API_KEY=
+REACT_APP_CACHE_TIME=
+REACT_APP_MAPBOX_API_KEY=
+
+
+
+
+
+
+
+Blablabla this text was generated ------>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
