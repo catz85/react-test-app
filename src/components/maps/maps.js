@@ -15,6 +15,8 @@ export default function Maps({lon, lat}) {
             containerStyle={{
                 height: '100%',
                 width: '100%',
+                maxHeight: '480px',
+                minHeight: '320px',
                 position: 'absolute',
                 top: 0,
                 bottom: 0
